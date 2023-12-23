@@ -25,7 +25,7 @@
                       <mat-label>Размер</mat-label>
                       <input type="number" [(ngModel)]="count" matInput (ngModelChange)="reset()">
                     </mat-form-field>
-                    <button class="add_button" [disabled]="!availabeText" mat-raised-button (click)="onAdd()">Добавить</button>
+                    <button class="add_button" [disabled]="type.value === '1' && !availabeText" mat-raised-button (click)="onAdd()">Добавить</button>
             </div>
             <div *ngIf="type.value === '0'">Всего места: {{status?.sizeLeft}}</div>
             <div *ngIf="type.value === '1' && selectedProduct">{{availabeText}}</div>
