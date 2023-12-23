@@ -37,7 +37,7 @@ export class AddTransferComponent implements OnInit{
   onAdd() {
     let count = this.count;
     this.products.forEach((p) => count += p?.count || 0);
-    const productCount = this.status.products?.find((p) => p.name === this.selectedProduct?.value)?.count
+    const productCount = this.status.products?.find((p) => p && p?.name === this.selectedProduct?.value)?.count
     if ((count > this.status.sizeLeft && this.type.value === '0')
     || (this.type.value === '1' && this.count > productCount)) {
       this.error = true;
@@ -45,7 +45,7 @@ export class AddTransferComponent implements OnInit{
     }
 
     if (!!this.selectedProduct?.value && this.count !== 0) {
-      const existingProduct = this.products.find((p) => p.name === this.selectedProduct?.value);
+      const existingProduct = this.products.find((p) => p && p?.name === this.selectedProduct?.value);
 
       if (existingProduct) {
         existingProduct.count += this.count;
@@ -82,6 +82,6 @@ export class AddTransferComponent implements OnInit{
       }
     })
 
-    return `Доступно  ${product.name} - ${count}`;
+    return product?.name && count ? `Доступно  ${product?.name} - ${count}` : '';
   }
 }
