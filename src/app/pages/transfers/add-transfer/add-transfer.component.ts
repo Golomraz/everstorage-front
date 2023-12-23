@@ -77,7 +77,7 @@ export class AddTransferComponent implements OnInit{
     const product = this.status?.products?.find((p) => p.name === this.selectedProduct?.value);
     let count = product?.count;
     this.products.forEach((p) => {
-      if (p.name === product.name) {
+      if (p.name === product?.name) {
         count -= p.count
       }
     })
