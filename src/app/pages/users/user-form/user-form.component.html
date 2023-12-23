@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="login">
+        <form class="example-form" [formGroup]="userForm">
+            <mat-form-field class="example-full-width">
+              <mat-label>Имя</mat-label>
+              <input formControlName="name" matInput>
+            </mat-form-field>
+          
+            <mat-form-field class="example-full-width">
+              <mat-label>Логин</mat-label>
+              <input formControlName="username" matInput>
+            </mat-form-field>
+          
+            <mat-form-field class="example-full-width">
+              <mat-label>Пароль</mat-label>
+              <input formControlName="password" matInput>
+            </mat-form-field>
+          
+                <mat-radio-group formControlName="role" aria-label="Роль">
+                    <mat-radio-button value="0">Пользователь</mat-radio-button>
+                    <mat-radio-button value="1">Админ</mat-radio-button>
+                  </mat-radio-group>
+
+            <button mat-raised-button (click)="onSubmit()">{{ isNew ? 'Добавить' : 'Изменить'}}</button>
+          </form>
+    </div>
+</div>

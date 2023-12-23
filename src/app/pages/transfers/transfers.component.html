@@ -1,0 +1,28 @@
+<table *ngIf="dataSource" mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="date">
+        <th class="title" mat-header-cell *matHeaderCellDef mat-sort-header>Дата</th>
+        <td class="content" mat-cell *matCellDef="let item">{{item?.date || '' | date}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="data">
+        <th class="title" mat-header-cell *matHeaderCellDef mat-sort-header>Товары</th>
+        <td class="content" mat-cell *matCellDef="let item">
+            <div *ngFor="let i of item.data">
+                Склад: {{i.storage}} - {{i.product.title}} {{i.product.count}}
+            </div>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="user">
+        <th class="title" mat-header-cell *matHeaderCellDef mat-sort-header>Пользователь</th>
+        <td class="content" mat-cell *matCellDef="let item">{{item?.userName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <th class="title" mat-header-cell *matHeaderCellDef mat-sort-header>Тип</th>
+        <td [ngClass]="{'green': item.type === '0'}" class="content type" mat-cell *matCellDef="let item">{{getType(item.type)}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

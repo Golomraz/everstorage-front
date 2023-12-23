@@ -1,0 +1,26 @@
+.container {
+    height: 500px;
+}
+
+.title {
+    margin: 0 auto;
+    font-size: 25px;
+    width: fit-content;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.size {
+    margin: 0 auto;
+    font-size: 22px;
+    width: fit-content;
+}
+
+.products {
+    margin-left: 50px;
+    font-size: 20px;
+
+    li {
+        margin-bottom: 5px;
+    }
+}

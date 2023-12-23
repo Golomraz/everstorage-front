@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="login">
+        <form class="example-form" [formGroup]="storageForm">
+            <mat-form-field class="example-full-width">
+              <mat-label>Имя</mat-label>
+              <input formControlName="name" matInput>
+            </mat-form-field>
+          
+            <mat-form-field class="example-full-width">
+              <mat-label>Размер</mat-label>
+              <input type="number" formControlName="size" matInput>
+            </mat-form-field>
+
+            <button mat-raised-button (click)="onSubmit()">Добавить</button>
+          </form>
+    </div>
+</div>

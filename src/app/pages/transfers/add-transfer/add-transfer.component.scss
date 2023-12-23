@@ -1,0 +1,55 @@
+.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.example-form {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+  
+.half-width {
+    width: 20%;
+    height: 50%;
+    margin-left: 2px;
+}
+
+.login {
+    padding: 10px;
+}
+
+.products {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px 0 5px 0;
+}
+
+.add-product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error {
+    div {
+        background-color: red;
+    }
+  
+}
+
+.add_button {
+    margin: 0 0 22px 10px;
+    height: 55px;
+    font-size: 16px;
+}
+
+.product-input {
+    width: 600px;
+}

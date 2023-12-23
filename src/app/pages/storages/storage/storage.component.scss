@@ -1,0 +1,35 @@
+:host {
+    width: fit-content;
+    height: fit-content;
+}
+
+.container {
+    width: 400px;
+    height: 150px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    position: relative;
+}
+
+.info {
+    font-size: 20px;
+
+    p {
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.no-margin {
+    margin-bottom: 0;
+}

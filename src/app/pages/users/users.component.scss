@@ -1,0 +1,54 @@
+.actions {
+    display: flex;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+    .title {
+        font-size: 18px;
+        vertical-align: middle;
+        p {
+            margin: 0;
+        }
+    }
+
+    .content {
+        font-size: 18px;
+    }
+
+    mat-table {
+        background-color: rgb(233 246 255) ;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    .mdc-data-table__table {
+        min-width: 10% !important;
+    }
+
+    .header {
+        display: flex;
+        gap: 20px;
+        padding: 30px;
+        margin: 0 auto;
+        width: fit-content;
+        align-items: center;
+
+        p {
+            font-size: 30px;
+            margin: 0;
+        }
+
+        button {
+            width: 20px;
+        }
+    }
+
+    .table {
+        .add {
+            padding: 20px;
+            width: fit-content;
+            margin: 0 auto;
+        }
+    }

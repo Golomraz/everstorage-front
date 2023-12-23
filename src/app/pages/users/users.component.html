@@ -1,0 +1,42 @@
+<div class="table">
+    <div class="header">
+        <p>Пользователи</p>
+        
+    </div>
+ 
+    <mat-table *ngIf="dataSource" [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+            <th class='title' mat-header-cell *matHeaderCellDef><p>ФИО</p></th>
+            <td class = 'content' mat-cell *matCellDef="let item">{{item.name}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="username">
+            <th class='title' mat-header-cell *matHeaderCellDef><p>Логин</p></th>
+            <td class = 'content' mat-cell *matCellDef="let item">{{item.username}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="role">
+            <th class='title' mat-header-cell *matHeaderCellDef><p>Роль</p></th>
+            <td class = 'content' mat-cell *matCellDef="let item">{{item?.role || 'empty'}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="actions">
+            <th class='title' mat-header-cell *matHeaderCellDef>    </th>
+            <td class = 'content' class="actions_td" mat-cell *matCellDef="let item">
+                <div  class="actions">
+                    <button mat-raised-button color="primary" (click)="editUser(item)">Редактировать</button>
+                    <button mat-raised-button color="primary" (click)="removeUser(item)">Удалить</button>
+                </div>
+               
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </mat-table>
+
+    <div class="add">
+        <button color="primary" mat-raised-button (click)="openForm()">+</button>
+    </div>
+
+</div>

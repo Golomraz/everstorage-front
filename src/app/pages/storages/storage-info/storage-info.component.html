@@ -1,0 +1,10 @@
+<div class="container" *ngIf="storage && storage.products">
+    <div class="title">Название склада: {{storage.name}}</div>
+    <div class="size">Место: {{storage.sizeLeft}}/{{storage.size}}</div>
+    <hr/>
+    <ul class="products">
+        <li *ngFor="let product of storage.products">
+            <i>{{product?.title || product.name}}</i> - <b>{{product.count}} ед.</b>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="filters">
+        <input [formControl]="findByLetter" placeholder="Поиск по имени"/>
+    </div>
+    <div class='storages' *ngIf="storages">
+        <app-storage *ngFor="let storage of storages" (deleteEvent)="delete($event)" [storageData]="storage"></app-storage>
+    </div>
+    
+    <div class="actions">
+        <button color="primary" mat-raised-button (click)="addTransfer()">Внести перевозку</button>
+        <button color="primary" mat-raised-button (click)="addStorage()">Добавить склад</button>
+    </div>
+</div>

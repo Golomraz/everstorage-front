@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="login">
+        <div class="example-form">
+            <mat-radio-group [formControl]="type" (change)="resetType()" aria-label="Тип">
+                <mat-radio-button value="0">Поставка</mat-radio-button>
+                <mat-radio-button value="1">Вывоз</mat-radio-button>
+              </mat-radio-group>
+
+            <div *ngFor="let product of products" class="products">
+                <div>{{product.title}}</div>
+                <div>{{product.count}}</div>
+                <button mat-raised-button (click)="onDelete(product.id)">Удалить</button>
+            </div>
+          
+            <div class="add-product">
+                <mat-form-field class="product-input">
+                    <mat-label>Товар</mat-label>
+                    <mat-select [(ngModel)]="selectedProduct">
+                      <mat-option>Очистить</mat-option>
+                      <mat-option *ngFor="let product of productList" [value]="product">{{product.title}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+      
+                  <mat-form-field [ngClass]="{'error': error}" class="half-width">
+                      <mat-label>Размер</mat-label>
+                      <input type="number" [(ngModel)]="count" matInput (ngModelChange)="reset()">
+                    </mat-form-field>
+                    <button class="add_button" mat-raised-button (click)="onAdd()">Добавить</button>
+            </div>
+            <div *ngIf="type.value === '0'">Всего места: {{status?.sizeLeft}}</div>
+            <div *ngIf="type.value === '1' && selectedProduct">{{availabeText}}</div>
+            <button mat-raised-button (click)="onSubmit()">Внести</button>
+        </div>
+    </div>
+</div>
