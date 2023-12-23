@@ -82,6 +82,6 @@ export class AddTransferComponent implements OnInit{
       }
     })
 
-    return product?.name && count ? `Доступно  ${product?.name} - ${count}` : '';
+    return product?.title && count ? `Доступно  ${product?.title} - ${count}` : '';
   }
 }
