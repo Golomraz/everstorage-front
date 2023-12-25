@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { TransferService } from 'src/app/shared/services/transfer.service';
 import { ProductList } from '../products';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { PlaceList } from '../places';
 
 @Component({
   selector: 'app-add-transfer',
@@ -13,17 +14,23 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class AddTransferComponent implements OnInit{
   type = new FormControl('0');
   selectedProduct;
+  selectedPlace = '';
   count;
   products: any[] = [];
   status;
   error = false;
   productList = ProductList;
+  placesList = PlaceList;
+  
 
   constructor(private transferService: TransferService, public dialogRef: MatDialogRef<AddTransferComponent>, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe();
-    this.transferService.getStoragesStatus().subscribe(res => this.status = res)
+    this.transferService.getStoragesStatus().subscribe((res: any) => {
+      this.status = res
+      this.productList = res.products
+    })
   }
 
   onSubmit() {
@@ -31,26 +38,26 @@ export class AddTransferComponent implements OnInit{
       return;
     }
 
-    this.transferService.create({products: this.products, type: this.type.value, userName: this.authService.user.username}).subscribe(() => this.dialogRef.close())
+    this.transferService.create({products: this.products, type: this.type.value, userName: this.authService.user.username, place: this.selectedPlace}).subscribe(() => this.dialogRef.close())
   }
 
   onAdd() {
     let count = this.count;
     this.products.forEach((p) => count += p?.count || 0);
-    const productCount = this.status.products?.find((p) => p && p?.name === this.selectedProduct?.value)?.count
+    const productCount = this.status.products?.find((p) => p && p?.name === this.selectedProduct?.name)?.count
     if ((count > this.status.sizeLeft && this.type.value === '0')
     || (this.type.value === '1' && this.count > productCount)) {
       this.error = true;
       return;
     }
 
-    if (!!this.selectedProduct?.value && this.count !== 0) {
-      const existingProduct = this.products.find((p) => p && p?.name === this.selectedProduct?.value);
+    if (!!this.selectedProduct?.name && this.count !== 0) {
+      const existingProduct = this.products.find((p) => p && p?.name === this.selectedProduct?.name);
 
       if (existingProduct) {
         existingProduct.count += this.count;
       } else {
-        this.products.push({id: this.products.length, name: this.selectedProduct?.value, count: this.count, title: this.selectedProduct?.title});
+        this.products.push({id: this.products.length, name: this.selectedProduct?.name, count: this.count, title: this.selectedProduct?.title});
       }
 
       this.selectedProduct = null;
@@ -73,8 +80,7 @@ export class AddTransferComponent implements OnInit{
   }
 
   get availabeText() {
-    console.error(this.status)
-    const product = this.status?.products?.find((p) => p.name === this.selectedProduct?.value);
+    const product = this.status?.products?.find((p) => p.name === this.selectedProduct?.name);
     let count = product?.count;
     this.products.forEach((p) => {
       if (p && p?.name === product?.name) {

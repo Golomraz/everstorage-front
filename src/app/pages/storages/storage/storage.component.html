@@ -1,7 +1,7 @@
 <div *ngIf="storageData" class="container">
         <div class="info">
             <p>{{storageData.name}}</p>
-            <p class="no-margin">Занято: {{storageData.size - storageData.sizeLeft}}/{{storageData.size}}</p>
+            <p class="no-margin">Занято: {{storageData.size - storageData.sizeLeft}}/{{storageData.size}} м<sup>3</sup></p>
         </div>
         <mat-progress-bar [color]="barValue > 80 ? 'warn' : 'primary'" mode="determinate" [value]="barValue"></mat-progress-bar>
         <div class="actions">

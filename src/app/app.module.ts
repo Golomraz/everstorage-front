@@ -19,6 +19,7 @@ import localeRu from '@angular/common/locales/ru';
 import { registerLocaleData } from '@angular/common';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 registerLocaleData(localeRu);
 
@@ -41,7 +42,8 @@ registerLocaleData(localeRu);
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatProgressBarModule 
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true},
     { provide: LOCALE_ID, useValue: "ru" },],

@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, firstValueFrom, of, tap, from, Subject } from 'rxjs';
+import { catchError, firstValueFrom, of, tap, from, Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
+
+  isLoading = new BehaviorSubject(false);
 
   private _currentUser: any;
   authAction = new Subject();

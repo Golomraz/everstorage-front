@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, catchError, filter, switchMap, take, throwError } from "rxjs";
+import { BehaviorSubject, Observable, catchError, filter, finalize, switchMap, take, tap, throwError } from "rxjs";
 import { AuthService } from "./shared/services/auth.service";
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -28,8 +28,11 @@ export class CustomInterceptor implements HttpInterceptor {
     }
     const apiReq = req.clone({
       url: `https://back-8c1p.onrender.com/${req.url}`,
+      // url: `http://localhost:3000/${req.url}`,
     });
     return next.handle(apiReq).pipe(
+      tap(() => this.authService.isLoading.next(true)),
+      finalize(() => this.authService.isLoading.next(false)),
       catchError((e) => {
         if (e instanceof HttpErrorResponse && e.status === 401) {
             return this.handle401Error(req, next);

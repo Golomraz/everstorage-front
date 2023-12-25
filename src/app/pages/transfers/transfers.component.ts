@@ -20,7 +20,7 @@ export class TransfersComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns = ['date', 'data', 'user', 'type']
+  displayedColumns = ['date', 'data', 'user','place', 'type']
   dataSource = new MatTableDataSource([]);
 
   constructor(private transferService: TransferService) {}

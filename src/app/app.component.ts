@@ -10,8 +10,12 @@ export class AppComponent implements OnInit {
   title = 'sklad-front';
   isLogin = false;
   constructor(private authService: AuthService) {}
+  isLoading = false;
 
   ngOnInit(): void {
+    this.authService.isLoading.subscribe((r) => this.isLoading = r)
+
+
     this.authService.authAction.subscribe(() => {
         this.isLogin = !localStorage.getItem('accessToken');
     })
