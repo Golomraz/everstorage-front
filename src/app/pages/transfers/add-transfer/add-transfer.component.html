@@ -26,18 +26,17 @@
                       <input type="number" [(ngModel)]="count" matInput (ngModelChange)="reset()">
                     </mat-form-field>
 
-                    <mat-form-field *ngIf="type.value === '1'">
-                      <mat-label>Место</mat-label>
-                      <mat-select [(ngModel)]="selectedPlace">
-                        <mat-option>Очистить</mat-option>
-                        <mat-option *ngFor="let place of placesList" [value]="place">{{place}}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
                     <button class="add_button" [disabled]="type.value === '1' && !availabeText" mat-raised-button (click)="onAdd()">Добавить</button>
             </div>
+            <mat-form-field *ngIf="type.value === '1'">
+              <mat-label>Место</mat-label>
+              <mat-select [(ngModel)]="selectedPlace">
+                <mat-option *ngFor="let place of placesList" [value]="place">{{place}}</mat-option>
+              </mat-select>
+            </mat-form-field>
             <div *ngIf="type.value === '0'">Всего места: {{status?.sizeLeft}} м<sup>3</sup></div>
             <div *ngIf="type.value === '1' && selectedProduct && availabeText">{{availabeText}} м<sup>3</sup></div>
-            <button mat-raised-button (click)="onSubmit()">Внести</button>
+            <button mat-raised-button [disabled]="(type.value === '1' && selectedPlace) === '' || products?.length === 0" (click)="onSubmit()">Внести</button>
         </div>
     </div>
 </div>

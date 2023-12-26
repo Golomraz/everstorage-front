@@ -20,6 +20,7 @@ export class AddTransferComponent implements OnInit{
   status;
   error = false;
   productList = ProductList;
+  filteredProductList;
   placesList = PlaceList;
   
 
@@ -29,7 +30,7 @@ export class AddTransferComponent implements OnInit{
     this.authService.getCurrentUser().subscribe();
     this.transferService.getStoragesStatus().subscribe((res: any) => {
       this.status = res
-      this.productList = res.products
+      this.filteredProductList = res.products
     })
   }
 
@@ -73,6 +74,12 @@ export class AddTransferComponent implements OnInit{
     this.products = []
     this.count = null;
     this.selectedProduct = null;
+
+    if (this.type.value === '1') {
+      this.productList = this.filteredProductList;
+    } else {
+      this.productList = ProductList;
+    }
   }
 
   onDelete(id: number) {
