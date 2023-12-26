@@ -27,8 +27,8 @@ export class CustomInterceptor implements HttpInterceptor {
       req = this._addToken(req, this.accessToken || this.refreshToken || '');
     }
     const apiReq = req.clone({
-      // url: `https://back-8c1p.onrender.com/${req.url}`,
-      url: `http://localhost:3000/${req.url}`,
+      url: `https://back-8c1p.onrender.com/${req.url}`,
+      // url: `http://localhost:3000/${req.url}`,
     });
     return next.handle(apiReq).pipe(
       tap(() => this.authService.isLoading.next(true)),
