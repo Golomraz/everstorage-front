@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="login">
+        <form class="example-form" [formGroup]="productForm">
+            <mat-form-field class="example-full-width">
+              <mat-label>Кодовое имя</mat-label>
+              <input formControlName="name" matInput>
+            </mat-form-field>
+          
+            <mat-form-field class="example-full-width">
+              <mat-label>Название</mat-label>
+              <input formControlName="title" matInput>
+            </mat-form-field>
+
+            <button mat-raised-button (click)="onSubmit()">{{ isNew ? 'Добавить' : 'Изменить'}}</button>
+          </form>
+    </div>
+</div>

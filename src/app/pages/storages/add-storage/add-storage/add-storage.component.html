@@ -11,6 +11,20 @@
               <input type="number" formControlName="size" matInput>
             </mat-form-field>
 
+            <div class="adress">
+              <mat-form-field class="example-full-width">
+                <mat-label>Адрес</mat-label>
+                <input formControlName="adress" matInput>
+              </mat-form-field>
+              <div *ngIf="!!adressItems.length" class="item-container">
+                <div class="item" *ngFor="let option of adressItems" (click)="selectAddress(option)">
+                  {{option.text}}
+                </div>
+              </div>
+            </div>
+            
+
+
             <button mat-raised-button (click)="onSubmit()">Добавить</button>
           </form>
     </div>

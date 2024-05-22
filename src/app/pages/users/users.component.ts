@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserFormComponent } from './user-form/user-form.component';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -10,13 +11,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  constructor(public dialog: MatDialog, private http: HttpClient) {}
+  user;
+  constructor(public dialog: MatDialog, private http: HttpClient, private authService: AuthService) {}
   dataSource;
 
   displayedColumns = ['name', 'username', 'role', 'actions'];
 
     ngOnInit(): void {
       this.getUser();
+      this.user = this.authService.user;
+      console.error(this.user)
     }
 
   openForm(): void {

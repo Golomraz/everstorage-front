@@ -11,3 +11,10 @@
         <button color="primary" mat-raised-button (click)="addStorage()">Добавить склад</button>
     </div>
 </div>
+<div class="map">
+    <ya-map [center]="[44.606683, 40.105852]" [zoom]="12">
+        <ng-container *ngFor="let storage of storages">
+            <ya-placemark *ngIf="!!storage.coordinates.length" [geometry]="storage.coordinates" [properties]="{iconCaption: storage.name}"></ya-placemark>
+        </ng-container>
+      </ya-map>
+</div>

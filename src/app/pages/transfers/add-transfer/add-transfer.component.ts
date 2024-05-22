@@ -5,6 +5,7 @@ import { TransferService } from 'src/app/shared/services/transfer.service';
 import { ProductList } from '../products';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { PlaceList } from '../places';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-transfer',
@@ -19,18 +20,23 @@ export class AddTransferComponent implements OnInit{
   products: any[] = [];
   status;
   error = false;
-  productList = ProductList;
+  backendProductList: any[] = [];
+  productList = this.backendProductList;
   filteredProductList;
   placesList = PlaceList;
   
 
-  constructor(private transferService: TransferService, public dialogRef: MatDialogRef<AddTransferComponent>, private authService: AuthService) {}
+  constructor(private transferService: TransferService, public dialogRef: MatDialogRef<AddTransferComponent>, private authService: AuthService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe();
     this.transferService.getStoragesStatus().subscribe((res: any) => {
       this.status = res
       this.filteredProductList = res.products
+    })
+
+    this.http.get('products').subscribe((res: any) => {this.backendProductList = res
+      this.productList = res
     })
   }
 
@@ -78,7 +84,7 @@ export class AddTransferComponent implements OnInit{
     if (this.type.value === '1') {
       this.productList = this.filteredProductList;
     } else {
-      this.productList = ProductList;
+      this.productList = this.backendProductList;
     }
   }
 

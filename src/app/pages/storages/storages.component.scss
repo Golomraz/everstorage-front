@@ -1,7 +1,13 @@
+:host {
+    display: flex;
+    flex-direction: row;
+}
+
 .container {
     height: 920px;
     position: relative;
     padding: 0 0 0 50px;
+    width: 1000px;
 }
 
 .filters {
@@ -40,4 +46,10 @@
         width: 400px;
         height: 60px;
     }
+}
+
+.map {
+    padding: 50px;
+    width: 600px;
+    height: 700px;
 }

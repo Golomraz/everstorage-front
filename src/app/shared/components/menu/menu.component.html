@@ -3,6 +3,7 @@
         <img src="assets/logo.svg">
         <button color="primary" mat-raised-button routerLink="storages">Склады</button>
         <button color="primary" mat-raised-button routerLink="transfers">Перевозки</button>
+        <button *ngIf="isAdmin" color="primary" mat-raised-button routerLink="products">Товары</button>
     </div>
    <div class="menu_bottom">
         <button *ngIf="isAdmin" color="primary" mat-raised-button routerLink="users">Пользователи</button>

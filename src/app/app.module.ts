@@ -20,8 +20,14 @@ import { registerLocaleData } from '@angular/common';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { AngularYandexMapsModule, YaConfig  } from 'angular8-yandex-maps';
 
 registerLocaleData(localeRu);
+
+const mapConfig: YaConfig = {
+  apikey: '4dd6334b-930b-4e8d-911c-bed2c27a4537',
+  lang: 'ru_RU',
+};
 
 @NgModule({
   declarations: [
@@ -43,7 +49,8 @@ registerLocaleData(localeRu);
     MatSelectModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AngularYandexMapsModule.forRoot(mapConfig)
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true},
     { provide: LOCALE_ID, useValue: "ru" },],

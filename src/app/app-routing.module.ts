@@ -21,6 +21,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
   },
   {
+    path: 'products',
+    canActivate: [(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+      const authService = inject(AuthService);
+      const isAdmin = authService.user?.role === '1'
+      return isAdmin}],
+    loadChildren: () => import('./pages/products/products.module').then(m => m.ProductsModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
   },

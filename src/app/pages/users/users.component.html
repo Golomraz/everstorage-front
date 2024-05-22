@@ -17,7 +17,9 @@
     
         <ng-container matColumnDef="role">
             <th class='title' mat-header-cell *matHeaderCellDef><p>Роль</p></th>
-            <td class = 'content' mat-cell *matCellDef="let item">{{item?.role || 'empty'}}</td>
+            <td class = 'content' mat-cell *matCellDef="let item">
+                <div *ngIf="item?.role === '1'">Админ</div>
+                <div *ngIf="item?.role === '0'">Пользователь</div>
         </ng-container>
     
         <ng-container matColumnDef="actions">
@@ -25,7 +27,7 @@
             <td class = 'content' class="actions_td" mat-cell *matCellDef="let item">
                 <div  class="actions">
                     <button mat-raised-button color="primary" (click)="editUser(item)">Редактировать</button>
-                    <button mat-raised-button color="primary" (click)="removeUser(item)">Удалить</button>
+                    <button mat-raised-button color="primary" (click)="removeUser(item)" [disabled]="item.username === user.username">Удалить</button>
                 </div>
                
             </td>

@@ -11,7 +11,14 @@ import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { AngularYandexMapsModule, YaConfig  } from 'angular8-yandex-maps';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
+
+const mapConfig: YaConfig = {
+  apikey: '4dd6334b-930b-4e8d-911c-bed2c27a4537',
+  lang: 'ru_RU',
+};
 const routes: Routes = [{
   path: '', component: StoragesComponent
 }]
@@ -33,7 +40,9 @@ const routes: Routes = [{
     MatRadioModule,
     MatDialogModule,
     ReactiveFormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatAutocompleteModule,
+    AngularYandexMapsModule.forRoot(mapConfig)
   ],
   exports: [RouterModule]
 })
