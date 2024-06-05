@@ -34,7 +34,15 @@
                 <mat-option *ngFor="let place of placesList" [value]="place">{{place}}</mat-option>
               </mat-select>
             </mat-form-field>
-            <div *ngIf="type.value === '0'">Всего места: {{status?.sizeLeft}} м<sup>3</sup></div>
+            <mat-form-field *ngIf="type.value === '0'">
+              <mat-label>Склад</mat-label>
+              <mat-select [(ngModel)]="selectedStorage" (ngModelChange)="resetProducts()">
+                <mat-option [value]="''">Автоматическое распределение</mat-option>
+                <mat-option *ngFor="let storage of storages" [value]="storage">{{storage.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="type.value === '0' && !selectedStorage">Всего места: {{status?.sizeLeft}} м<sup>3</sup></div>
+            <div *ngIf="type.value === '0' && selectedStorage">Доступно места в складе: {{selectedStorage?.sizeLeft}} м<sup>3</sup></div>
             <div *ngIf="type.value === '1' && selectedProduct && availabeText">{{availabeText}} м<sup>3</sup></div>
             <button mat-raised-button [disabled]="(type.value === '1' && selectedPlace) === '' || products?.length === 0" (click)="onSubmit()">Внести</button>
         </div>

@@ -3,7 +3,7 @@
         <input [formControl]="findByLetter" placeholder="Поиск по имени"/>
     </div>
     <div class='storages' *ngIf="storages">
-        <app-storage *ngFor="let storage of storages" (deleteEvent)="delete($event)" [storageData]="storage"></app-storage>
+        <app-storage *ngFor="let storage of storages" (deleteEvent)="delete($event)" [storageData]="storage" [isAdmin]="isAdmin"></app-storage>
     </div>
     
     <div class="actions">

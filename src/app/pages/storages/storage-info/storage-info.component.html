@@ -1,6 +1,7 @@
 <div class="container" *ngIf="storage && storage.products">
     <div class="title">Название склада: {{storage.name}}</div>
     <div class="size">Место: {{storage.sizeLeft}}/{{storage.size}} м<sup>3</sup></div>
+    <div *ngIf="storage?.adress" class="adress">Адрес: {{storage.adress}}</div>
     <hr/>
     <ul class="products">
         <li *ngFor="let product of storage.products">

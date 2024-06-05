@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class StorageComponent {
   @Input() storageData;
+  @Input() isAdmin = false;
   @Output() deleteEvent = new EventEmitter();
 
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar) {}

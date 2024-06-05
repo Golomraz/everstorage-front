@@ -5,6 +5,7 @@ import { AddStorageComponent } from './add-storage/add-storage/add-storage.compo
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime, filter } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-storages',
@@ -14,8 +15,9 @@ import { debounceTime, filter } from 'rxjs';
 export class StoragesComponent implements OnInit {
   storages;
   findByLetter = new FormControl('');
+  isAdmin = false;
 
-  constructor(public dialog: MatDialog, private storageService: StorageService) {}
+  constructor(public dialog: MatDialog, private storageService: StorageService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.getStorages();
@@ -25,6 +27,10 @@ export class StoragesComponent implements OnInit {
         .getByLetter(res || ' ')
         .subscribe((res) => this.storages = res);
     });
+
+    this.authService.getCurrentUser().subscribe((res: any) => {
+      this.isAdmin = res.role === '1'
+     })
   }
 
   addTransfer(): void {

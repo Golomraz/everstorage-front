@@ -6,6 +6,7 @@ import { ProductList } from '../products';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { PlaceList } from '../places';
 import { HttpClient } from '@angular/common/http';
+import { StorageService } from 'src/app/shared/services/storage.service';
 
 @Component({
   selector: 'app-add-transfer',
@@ -15,6 +16,8 @@ import { HttpClient } from '@angular/common/http';
 export class AddTransferComponent implements OnInit{
   type = new FormControl('0');
   selectedProduct;
+  selectedStorage;
+  storages;
   selectedPlace = '';
   count;
   products: any[] = [];
@@ -26,10 +29,15 @@ export class AddTransferComponent implements OnInit{
   placesList = PlaceList;
   
 
-  constructor(private transferService: TransferService, public dialogRef: MatDialogRef<AddTransferComponent>, private authService: AuthService, private http: HttpClient) {}
+  constructor(private transferService: TransferService, public dialogRef: MatDialogRef<AddTransferComponent>, private authService: AuthService, private http: HttpClient,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe();
+
+    this.storageService.getAll().subscribe((res) => this.storages = res)
+
     this.transferService.getStoragesStatus().subscribe((res: any) => {
       this.status = res
       this.filteredProductList = res.products
@@ -45,7 +53,7 @@ export class AddTransferComponent implements OnInit{
       return;
     }
 
-    this.transferService.create({products: this.products, type: this.type.value, userName: this.authService.user.username, place: this.selectedPlace}).subscribe(() => this.dialogRef.close())
+    this.transferService.create({products: this.products, type: this.type.value, userName: this.authService.user.username, place: this.selectedPlace, storageID: this.selectedStorage?._id || ''}).subscribe(() => this.dialogRef.close())
   }
 
   onAdd() {
@@ -53,7 +61,7 @@ export class AddTransferComponent implements OnInit{
     this.products.forEach((p) => count += p?.count || 0);
     const productCount = this.status.products?.find((p) => p && p?.name === this.selectedProduct?.name)?.count
     if ((count > this.status.sizeLeft && this.type.value === '0')
-    || (this.type.value === '1' && this.count > productCount)) {
+    || (this.type.value === '1' && this.count > productCount) || (this.selectedStorage && this.selectedStorage.sizeLeft < count) ) {
       this.error = true;
       return;
     }
@@ -74,6 +82,10 @@ export class AddTransferComponent implements OnInit{
 
   reset() {
     this.error = false;
+  }
+
+  resetProducts() {
+    this.products = []
   }
 
   resetType() {

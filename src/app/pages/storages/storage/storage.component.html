@@ -6,7 +6,7 @@
         <mat-progress-bar [color]="barValue > 80 ? 'warn' : 'primary'" mode="determinate" [value]="barValue"></mat-progress-bar>
         <div class="actions">
             <button color="primary" mat-raised-button (click)="showInfo(storageData._id)">Подробнее</button>
-        <button color="warn" mat-raised-button (click)="delete(storageData._id)">Удалить</button>
+        <button *ngIf="isAdmin" color="warn" mat-raised-button (click)="delete(storageData._id)">Удалить</button>
         </div>
 
 </div>

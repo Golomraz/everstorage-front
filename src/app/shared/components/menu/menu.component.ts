@@ -11,7 +11,6 @@ export class MenuComponent implements OnInit{
   isAdmin = false;
   ngOnInit(): void {
    this.authService.getCurrentUser().subscribe((res: any) => {
-    console.error(res)
     this.isAdmin = res.role === '1'
    })
   }
